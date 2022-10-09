@@ -57,11 +57,27 @@ export const msalConfig = {
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/resources-and-scopes.md
  */
 export const protectedResources = {
-  apiTodoList: {
-    endpoint: "http://localhost:5000/api/todolist",
+  apiExplorersSync: {
+    endpoint:
+      "https://hillsspikedatameshservice.azurewebsites.net/explorers/sync",
     scopes: {
-      read: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/Todolist.Read"],
-      write: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/Todolist.ReadWrite"],
+      read: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Read"],
+      write: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Write"],
+    },
+  },
+  apiClientsSync: {
+    endpoint:
+      "https://hillsspikedatameshservice.azurewebsites.net/clients/sync",
+    scopes: {
+      read: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Read"],
+      write: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Write"],
+    },
+  },
+  apiOpportunitiesSync: {
+    endpoint: "http://localhost/opportunities/sync",
+    scopes: {
+      read: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Read"],
+      write: ["api://5130d7ef-8880-416a-8613-bb6fb08be26d/HillsDatamesh.Write"],
     },
   },
   explorersAll: {
@@ -90,8 +106,15 @@ export const protectedResources = {
  */
 export const loginRequest = {
   scopes: [
-    ...protectedResources.apiTodoList.scopes.read,
-    ...protectedResources.apiTodoList.scopes.write,
+    ...protectedResources.apiClientsSync.scopes.read,
+    ...protectedResources.apiClientsSync.scopes.write,
+
+    ...protectedResources.apiExplorersSync.scopes.read,
+    ...protectedResources.apiExplorersSync.scopes.write,
+
+    ...protectedResources.apiOpportunitiesSync.scopes.read,
+    ...protectedResources.apiOpportunitiesSync.scopes.write,
+
     ...protectedResources.explorersAll.scopes.read,
     ...protectedResources.explorersAll.scopes.write,
 

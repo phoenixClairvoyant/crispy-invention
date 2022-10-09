@@ -41,6 +41,48 @@ export const getExplorers = async () => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+export const syncClients = async () => {
+  const accessToken = await getToken(
+    protectedResources.apiClientsSync.scopes.read
+  );
+
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+
+  headers.append("Authorization", bearer);
+
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
+
+  return fetch(protectedResources.apiClientsSync.endpoint, options)
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+
+export const syncExplorers = async () => {
+  const accessToken = await getToken(
+    protectedResources.apiExplorersSync.scopes.read
+  );
+
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+
+  headers.append("Authorization", bearer);
+
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
+
+  return fetch(protectedResources.apiExplorersSync.endpoint, options)
+    .then((response) => {
+      console.log(response);
+      return response;
+    })
+    .catch((error) => console.log(error));
+};
 
 export const getTasks = async () => {
   const accessToken = await getToken(
