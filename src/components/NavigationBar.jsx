@@ -8,7 +8,7 @@ import { Nav, Navbar, Dropdown, DropdownButton } from "react-bootstrap";
 
 import { loginRequest } from "../authConfig";
 import { AccountPicker } from "./AccountPicker";
-import { syncClients, syncExplorers } from "../fetch";
+import { syncClients, syncExplorers, getApiAuth } from "../fetch";
 
 export const NavigationBar = () => {
   const [showProfilePicker, setShowProfilePicker] = useState(false);
@@ -23,6 +23,13 @@ export const NavigationBar = () => {
   const handleClientSync = async () => {
     //instance.loginRedirect(loginRequest).catch((error) => console.log(error));
     await syncClients();
+  };
+
+  const handleApiAuth = async () => {
+    //instance.loginRedirect(loginRequest).catch((error) => console.log(error));
+    await getApiAuth().then((res) => {
+      console.log(res);
+    });
   };
 
   const handleExplorerSync = async () => {
@@ -85,8 +92,8 @@ export const NavigationBar = () => {
               <Dropdown.Item as="button" onClick={handleSwitchAccount}>
                 Switch account
               </Dropdown.Item>
-              <Dropdown.Item as="button" onClick={handleClientSync}>
-                Sync Client
+              <Dropdown.Item as="button" onClick={handleApiAuth}>
+                API Auth
               </Dropdown.Item>
 
               <Dropdown.Item as="button" onClick={handleExplorerSync}>

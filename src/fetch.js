@@ -26,7 +26,7 @@ export const getExplorers = async () => {
   const accessToken = await getToken(
     protectedResources.explorersAll.scopes.read
   );
-
+  console.log(accessToken);
   const headers = new Headers();
   const bearer = `Bearer ${accessToken}`;
 
@@ -57,6 +57,30 @@ export const syncClients = async () => {
   };
 
   return fetch(protectedResources.apiClientsSync.endpoint, options)
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
+export const getApiAuth = async () => {
+  const accessToken = await getToken(
+    protectedResources.apiClientsSync.scopes.read
+  );
+
+  const headers = new Headers();
+  const bearer = `Bearer ${accessToken}`;
+
+  headers.append("Authorization", bearer);
+
+  const options = {
+    method: "GET",
+    headers: headers,
+  };
+
+  return fetch(
+    protectedResources.apiClientsConfig.endpoint +
+      "?accessToken=" +
+      accessToken,
+    options
+  )
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
